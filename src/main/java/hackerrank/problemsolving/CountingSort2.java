@@ -1,9 +1,9 @@
-package hackerrank;
+package hackerrank.problemsolving;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CountingSort1 {
+public class CountingSort2 {
 
 	static void printArray(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
@@ -16,10 +16,24 @@ public class CountingSort1 {
 
 	// Complete the countingSort function below.
 	static int[] countingSort(int[] arr) {
-		int[] result = new int[100];
+		int[] countsArray = new int[100];
+		int[] result = new int[arr.length];
 
 		for (int i = 0; i < arr.length; i++) {
-			result[arr[i]] += 1;
+			countsArray[arr[i]] += 1;
+		}
+		
+		int valueAmount = 0;
+		
+		int valueIndex = 0;
+		for (int j = 0; j < countsArray.length; j++) {
+			valueAmount = countsArray[j];
+			if (valueAmount > 0) {
+				for (int k = 0; k < valueAmount; k++) {					
+					result[valueIndex] = j;
+					valueIndex++;
+				}
+			}
 		}
 
 		return result;

@@ -1,4 +1,4 @@
-package hackerrank;
+package hackerrank.problemsolving;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

@@ -1,4 +1,5 @@
-package hackerrank;
+package hackerrank.java;
+
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -45,7 +46,7 @@ class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", cgpa=" + cgpa + "]";
+		return "\nStudent [id=" + id + ", name=" + name + ", cgpa=" + cgpa + "]";
 	}
 
 }
@@ -59,7 +60,6 @@ class StudentChecker implements Comparator<Student> {
 		if (s2.cgpa < s1.cgpa)
 			return -1;
 		int nameCompared = s1.name.compareTo(s2.name);
-		System.out.println("nameCompared: " + nameCompared);
 		nameCompared = nameCompared > 0 ? 1 : (nameCompared < 0 ? -1 : 0);
 		if (nameCompared == 0) {
 			if (s2.id > s1.id)
@@ -76,7 +76,6 @@ class Priorities {
 	// process all the given events and return all the students yet to be served in the priority order.
 	List<Student> getStudents(List<String> events) {
 		Queue<Student> queue = new PriorityQueue<Student>(events.size(), new StudentChecker());
-		List<Student> students = null;
 
 		for (Iterator<String> eventItr = events.iterator(); eventItr.hasNext();) {
 			String event = eventItr.next();
@@ -91,15 +90,15 @@ class Priorities {
 				id = Integer.parseInt(eventData[3]);
 				Student student = new Student(id, name, cgpa);
 				queue.add(student);
-				System.out.println("After adding:" + queue.toString());
 			} else if (!queue.isEmpty()) {
 				queue.remove();
-				System.out.println("After removing:" + queue.toString());
 			}
 		}
 
-		System.out.println("Done. " + queue.toString());
-		students = new ArrayList<Student>(queue);
+		List<Student> students = new ArrayList<Student>(queue.size());
+		while (!queue.isEmpty()) {
+			students.add(queue.poll());
+		}
 		return students;
 	}
 }
